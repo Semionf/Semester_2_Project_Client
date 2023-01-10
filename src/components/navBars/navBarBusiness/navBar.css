@@ -1,0 +1,17 @@
+a {
+  margin-top: 15px;
+  color: black !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none !important;
+  align-items: center;
+}
+
+a:hover {
+  color: white !important;
+}
+
+.list {
+  height: 90px;
+}

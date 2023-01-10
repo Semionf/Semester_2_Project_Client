@@ -1,0 +1,26 @@
+ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  list-style-type: none;
+  margin: 0;
+  padding-top: 5px;
+}
+
+a {
+  color: black !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration-style: none;
+  align-items: center;
+}
+.list {
+  width: 100vw;
+  height: 10vh;
+  background-color: blueviolet;
+}
+
+a:hover {
+  color: white !important;
+}
