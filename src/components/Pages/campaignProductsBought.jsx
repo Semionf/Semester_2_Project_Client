@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getProducts } from "../services/service";
-export const CampaignProductsBought = () => {
+export const CampaignProductsBought = ({ BusinessEmail }) => {
   //Organization (Per Campaign)
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -16,9 +16,7 @@ export const CampaignProductsBought = () => {
     <div>
       {products.length > 0 ? (
         <div>
-          <table>
-            
-          </table>
+          <table></table>
           <button
             className="rightSpace btn btn-primary"
             onClick={() => {

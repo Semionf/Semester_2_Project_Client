@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getProducts } from "../services/service";
+import { getAllProducts } from "../services/service";
 import "./style.css";
 
 export const Products = () => {
@@ -8,13 +8,13 @@ export const Products = () => {
   const descArr = [];
   const [display, setDisplay] = useState(false);
   const [key, setKey] = useState();
+  const [totalPrice, setTotalPrice] = useState();
 
   const productsData = async () => {
-    let product = await getProducts();
+    let product = await getAllProducts();
+    console.log(product);
     setProducts(product);
   };
-
- 
 
   const DescriptionDesplay = (ID) => {
     if (descArr[ID - 1] === undefined) {
@@ -39,7 +39,9 @@ export const Products = () => {
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Units in stock</th>
-            <th> Description / Delete</th>
+            <th scope="col">Enter how many to buy</th>
+            <th scope="col">Total price</th>
+            <th>Buy</th>
           </tr>
         </thead>
         <tbody>
@@ -49,8 +51,21 @@ export const Products = () => {
                 <>
                   <tr>
                     <th scope="row">{Product.Name}</th>
-                    <th>{Product.UnitPrice.Value}$</th>
-                    <th>{Product.UnitsInStock}</th>
+                    <th>{Product.Price}$</th>
+                    <th>{Product.Quantity}</th>
+                    <th>
+                      <input
+                        className="inputSize"
+                        placeholder="Press here"
+                        onChange={(event) => {
+                          setTotalPrice(
+                            parseInt(Product.Price) *
+                              parseInt(event.target.value),
+                          );
+                        }}
+                      ></input>
+                    </th>
+                    <th>{totalPrice}</th>
                     <th className="space">
                       {" "}
                       <button
@@ -59,17 +74,10 @@ export const Products = () => {
                           DescriptionDesplay(Product.ID);
                         }}
                       >
-                        Description
+                        Buy
                       </button>
                     </th>
                   </tr>
-                  {Product.ID === key && descArr.filter((m) => m === true) ? (
-                    <tr>
-                      <th colSpan={4}>
-                        {Product.UnitsInStock} {Product.QuantityPerUnit}
-                      </th>
-                    </tr>
-                  ) : null}
                 </>
               );
             })}

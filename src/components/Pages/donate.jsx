@@ -1,48 +1,51 @@
 import React, { useEffect, useState } from "react";
-import { getCampaigns, postDonation } from "../services/service";
-export const Donate = () => {
+import { getAllCampaigns, insertProduct } from "../services/service";
+export const Donate = ({ BusinessEmail }) => {
   const [campaigns, setCampaigns] = useState([]);
-  const [campaignName, setCampaignName] = useState("");
+  const [campaignHashtag, setCampaignHashtag] = useState("");
   const [productName, setProductName] = useState("");
-  const [numberOfProducts, setNumberOfProducts] = useState();
-  const [value, setValue] = useState();
+  const [Quantity, setQuantity] = useState();
+  const [price, setPrice] = useState();
 
   useEffect(() => {
     campaignData();
   }, []);
 
   const campaignData = async () => {
-    let campaign = await getCampaigns();
+    let campaign = await getAllCampaigns();
+    console.log(campaign);
     setCampaigns(campaign);
-  };
-  const handleChange = (e) => {
-    setCampaignName({ selectValue: e.target.value });
   };
 
   const submitDonation = async () => {
-    await postDonation({
-      campaignName: campaignName,
-      productName: productName,
-      numberOfProducts: numberOfProducts,
-      value: value,
+    await insertProduct({
+      Name: productName,
+      Quantity: Quantity,
+      Price: price,
+      Business_Email: BusinessEmail,
+      CampaignHashtag: campaignHashtag,
     });
+    setProductName("");
+    setPrice("");
+    setCampaignHashtag("");
+    setQuantity("");
   };
   //Buisness
   return (
     <div>
       <h1 className="headline">Donation</h1>
-      <label className="rightSpace">Campaign name:</label>
+      <label className="rightSpace">Campaign hashtag:</label>
       <select
         className="rightSpace"
-        onChange={() => {
-          handleChange();
+        onChange={(event) => {
+          setCampaignHashtag(event.target.value);
         }}
       >
         <option>Please choose from the following</option>
-        {campaigns === undefined
+        {campaigns !== undefined
           ? campaigns.length > 0 &&
             campaigns.map((c) => {
-              return <option>{c.name}</option>;
+              return <option key={c.ID}>{c.Hashtag}</option>;
             })
           : null}
       </select>
@@ -59,16 +62,16 @@ export const Donate = () => {
       <label className="rightSpace">Number of products:</label>
       <input
         onChange={(event) => {
-          setNumberOfProducts(parseInt(event.target.value));
+          setQuantity(parseInt(event.target.value));
         }}
         className="rightSpace"
         type="text"
       />
       <br />
-      <label className="rightSpace">Value:</label>
+      <label className="rightSpace">Price:</label>
       <input
         onChange={(event) => {
-          setValue(parseInt(event.target.value));
+          setPrice(parseFloat(event.target.value));
         }}
         className="rightSpace"
         type="text"

@@ -7,3 +7,6 @@ export * from "./twitts";
 export * from "./allProducts";
 export * from "./campaignProductsBought";
 export * from "./donate";
+export * from "./donations";
+export * from "./campaigns";
+export * from "./addCampaign";

@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { LogoutButton } from "../../logout/logout";
 import { newUser } from "../../services/service";
 
-export const ActivistRegister = ({ key, setRegistration }) => {
+export const ActivistRegister = ({ setRegistration }) => {
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
 
   function handleSubmit() {
-    let user = { Email: email, Address: address, Phone: phone, Role: key };
+    let user = { Email: email, Address: address, Phone: phone };
     newUser(user);
     setRegistration(true);
-    console.log(email, address, phone, key);
+    console.log(email, address, phone);
   }
 
   return (

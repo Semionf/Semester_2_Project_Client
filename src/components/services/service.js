@@ -1,19 +1,7 @@
 import axios from "axios";
 const URLServer = "http://localhost:7186/api/";
-export const getCampaigns = async () => {
-  let response = await axios.get(`${URLServer}Campaign/GET`);
-
-  if (response.status === 200) {
-    return Object.values(response.data);
-  }
-};
-
-export const postCampaign = async (Campaign) => {
-  await axios.post(`${URLServer}Campaign/POST`, Campaign);
-};
 
 export const postMessage = async (UserMessage) => {
-  console.log(UserMessage);
   await axios.post(`${URLServer}UserMessage/`, UserMessage);
 };
 
@@ -21,8 +9,8 @@ export const insertProduct = async (Product) => {
   await axios.post(`${URLServer}Product/POST`, Product);
 };
 
-export const getProducts = async (ID) => {
-  let response = await axios.get(`${URLServer}Product/GET/${ID}`);
+export const getProducts = async (Email) => {
+  let response = await axios.get(`${URLServer}Product/BUSINESS/${Email}`);
 
   if (response.status === 200) {
     return Object.values(response.data);
@@ -31,7 +19,6 @@ export const getProducts = async (ID) => {
 
 export const getRoles = async (userID) => {
   try {
-    console.log(userID);
     let endpointRoles = `${URLServer}Roles/${userID}`;
 
     let response = await axios.get(endpointRoles);
@@ -41,9 +28,8 @@ export const getRoles = async (userID) => {
   }
 };
 
-export const getOrganizationMail = async (Email) => {
+export const getMail = async (Email) => {
   let response = await axios.get(`${URLServer}User/CHECK/${Email}`);
-  console.log(response);
   if (response.status === 200) {
     return response.data;
   }
@@ -61,6 +47,38 @@ export const newUser = async (user) => {
   await axios.post(`${URLServer}User/POST`, user);
 };
 
-export const postDonation = async (Donation) => {
-  await axios.post(`${URLServer}Donation/`, Donation);
+export const getDonations = async (Email) => {
+  let response = await axios.get(`${URLServer}Product/GET/${Email}`);
+
+  if (response.status === 200) {
+    return Object.values(response.data);
+  }
+};
+
+export const newCampaign = async (campaign) => {
+  await axios.post(`${URLServer}Campaign/POST`, campaign);
+};
+
+export const getCampaigns = async (Email) => {
+  let response = await axios.get(`${URLServer}Campaign/GET/${Email}`);
+
+  if (response.status === 200) {
+    return Object.values(response.data);
+  }
+};
+
+export const getAllCampaigns = async () => {
+  let response = await axios.get(`${URLServer}Campaign/LOAD/`);
+  console.log(response);
+  if (response.status === 200) {
+    return Object.values(response.data);
+  }
+};
+
+export const getAllProducts = async () => {
+  let response = await axios.get(`${URLServer}Product/GETALL/`);
+  console.log(response);
+  if (response.status === 200) {
+    return Object.values(response.data);
+  }
 };

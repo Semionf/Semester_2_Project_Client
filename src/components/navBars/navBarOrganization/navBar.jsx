@@ -10,6 +10,7 @@ import CampaignIcon from "@mui/icons-material/Campaign";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import PhoneIcon from "@mui/icons-material/Phone";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import AddBoxIcon from "@mui/icons-material/AddBox";
 
 export const NavBar = (props) => {
   return (
@@ -27,13 +28,19 @@ export const NavBar = (props) => {
             </Link>
           </li>
           <li>
+            <Link to="/AddCampaign">
+              <AddBoxIcon fontSize="large" />
+              <div className="section-name">Add Campaign</div>
+            </Link>
+          </li>
+          <li>
             <Link to="/Campaigns">
               <CampaignIcon fontSize="large" />
               <div className="section-name">Campaigns</div>
             </Link>
           </li>
           <li>
-            <Link to="/Donations/:userID">
+            <Link to="/Donations/">
               <VolunteerActivismIcon fontSize="large" />
               <div className="section-name">Donations</div>
             </Link>

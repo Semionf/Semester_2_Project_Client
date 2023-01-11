@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getOrganizationMail, getRoles } from "../services/service";
+import { getMail, getRoles } from "../services/service";
 import {
   ProLobbyOwner,
   BusinessCompanyRepresentative,
@@ -34,7 +34,13 @@ export const CheckRoles = () => {
   const checkUserRole = (email) => {
     roles.map(async (m) => {
       if (m.name === "Non-Profit Organization Representative") {
-        let isReg = await getOrganizationMail(email);
+        let isReg = await getMail(email);
+        setRegistration(isReg);
+      } else if (m.name === "Business Company Representative") {
+        let isReg = await getMail(email);
+        setRegistration(isReg);
+      } else if (m.name === "Social Activist") {
+        let isReg = await getMail(email);
         setRegistration(isReg);
       }
     });
@@ -49,7 +55,10 @@ export const CheckRoles = () => {
       {roles.map((r) => {
         if (r.name === "Business Company Representative") {
           return isRegistered === true ? (
-            <BusinessCompanyRepresentative key={r.name} />
+            <BusinessCompanyRepresentative
+              key={r.name}
+              BusinessEmail={user.email}
+            />
           ) : (
             <BuisnessRegister
               setRegistration={setRegistration}
@@ -59,7 +68,11 @@ export const CheckRoles = () => {
           );
         } else if (r.name === "Non-Profit Organization Representative") {
           return isRegistered === true ? (
-            <NonProfitOrganizationRepresentative key={r.name} />
+            <NonProfitOrganizationRepresentative
+              key={r.name}
+              ID={r.ID}
+              Email={user.email}
+            />
           ) : (
             <OrganizationRegister
               setRegistration={setRegistration}
@@ -78,13 +91,12 @@ export const CheckRoles = () => {
           return isRegistered === true ? (
             <SocialActivist
               key={r.name}
-              userID={user.email}
+              UserEmail={user.email}
             />
           ) : (
             <ActivistRegister
               key={r.name}
               setRegistration={setRegistration}
-              role={r.name}
             />
           );
         } else return <NotAuthenticated key={null} />;

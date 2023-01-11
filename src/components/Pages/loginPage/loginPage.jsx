@@ -9,7 +9,7 @@ export const LoginPage = () => {
       <h1>Welcome to PromoteIt Website!</h1>
       <div className="LoginWithText">
         <div className="container2">
-          <h7>Please Login or Register if you don't have an account yet</h7>
+          <h6>Please Login or Register if you don't have an account yet</h6>
           <button
             className="Login_button"
             onClick={async () => {

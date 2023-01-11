@@ -2,16 +2,19 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import {
   About,
+  AddCampaign,
   AllProducts,
   CampaignProductsBought,
+  Campaigns,
   ContactUs,
   Donate,
+  Donations,
   Home,
   Products,
   ProductsBought,
   Twitts,
 } from "../Pages/main";
-export const Routing = () => {
+export const Routing = ({ Email, BusinessEmail }) => {
   return (
     <Routes>
       <Route
@@ -40,11 +43,23 @@ export const Routing = () => {
       ></Route>
       <Route
         path="/Donate"
-        element={<Donate />}
+        element={<Donate BusinessEmail={BusinessEmail} />}
+      ></Route>
+      <Route
+        path="/Donations/"
+        element={<Donations Email={Email} />}
+      ></Route>
+      <Route
+        path="/AddCampaign"
+        element={<AddCampaign Email={Email} />}
+      ></Route>
+      <Route
+        path="/Campaigns"
+        element={<Campaigns Email={Email} />}
       ></Route>
       <Route
         path="/ProductsBought"
-        element={<CampaignProductsBought />}
+        element={<CampaignProductsBought BusinessEmail={BusinessEmail} />}
       ></Route>
       <Route
         path="/AllProducts"
