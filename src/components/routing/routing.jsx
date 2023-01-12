@@ -31,7 +31,7 @@ export const Routing = ({ Email, BusinessEmail }) => {
       ></Route>
       <Route
         path="/Products"
-        element={<Products />}
+        element={<Products Email={Email} />}
       ></Route>
       <Route
         path="/ProductsBought/:userID"

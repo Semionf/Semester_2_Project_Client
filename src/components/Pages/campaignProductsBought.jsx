@@ -7,7 +7,7 @@ export const CampaignProductsBought = ({ BusinessEmail }) => {
     productsData();
   }, []);
   const productsData = async () => {
-    let product = await getProducts();
+    let product = await getProducts(BusinessEmail);
     setProducts(product);
   };
 

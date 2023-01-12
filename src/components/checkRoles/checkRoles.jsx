@@ -91,7 +91,7 @@ export const CheckRoles = () => {
           return isRegistered === true ? (
             <SocialActivist
               key={r.name}
-              UserEmail={user.email}
+              Email={user.email}
             />
           ) : (
             <ActivistRegister

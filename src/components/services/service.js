@@ -9,6 +9,14 @@ export const insertProduct = async (Product) => {
   await axios.post(`${URLServer}Product/POST`, Product);
 };
 
+export const getProductsBought = async (Email) => {
+  let response = await axios.get(`${URLServer}Product/BOUGHT/${Email}`);
+
+  if (response.status === 200) {
+    return Object.values(response.data);
+  }
+};
+
 export const getProducts = async (Email) => {
   let response = await axios.get(`${URLServer}Product/BUSINESS/${Email}`);
 
@@ -81,4 +89,16 @@ export const getAllProducts = async () => {
   if (response.status === 200) {
     return Object.values(response.data);
   }
+};
+
+export const getBalance = async (Email) => {
+  let response = await axios.get(`${URLServer}User/BALANCE/${Email}`);
+
+  if (response.status === 200) {
+    return response.data;
+  }
+};
+
+export const buyProduct = async (product) => {
+  await axios.post(`${URLServer}Product/BUY`, product);
 };

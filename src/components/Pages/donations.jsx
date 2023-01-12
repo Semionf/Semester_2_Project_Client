@@ -13,6 +13,7 @@ export const Donations = ({ Email }) => {
   useEffect(() => {
     donationsData();
   }, []);
+
   return (
     <div>
       <h1>All Donations</h1>
@@ -21,6 +22,7 @@ export const Donations = ({ Email }) => {
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Campaign Hashtag</th>
             <th scope="col">Business Name</th>
           </tr>
         </thead>
@@ -32,6 +34,7 @@ export const Donations = ({ Email }) => {
                   <tr>
                     <th scope="row">{Donation.Name}</th>
                     <th>{Donation.Quantity}</th>
+                    <th>{Donation.CampaignHashtag}</th>
                     <th>{Donation.Business_Email}</th>
                   </tr>
                 </>

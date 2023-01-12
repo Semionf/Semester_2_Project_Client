@@ -16,14 +16,14 @@ export const Donate = ({ BusinessEmail }) => {
     console.log(campaign);
     setCampaigns(campaign);
   };
-
+  let CampaignHashtag;
   const submitDonation = async () => {
     await insertProduct({
       Name: productName,
       Quantity: Quantity,
       Price: price,
       Business_Email: BusinessEmail,
-      CampaignHashtag: campaignHashtag,
+      CampaignHashtag: CampaignHashtag,
     });
     setProductName("");
     setPrice("");
@@ -45,7 +45,9 @@ export const Donate = ({ BusinessEmail }) => {
         {campaigns !== undefined
           ? campaigns.length > 0 &&
             campaigns.map((c) => {
-              return <option key={c.ID}>{c.Hashtag}</option>;
+              return (
+                <option key={c.ID}>{(CampaignHashtag = c.Hashtag)}</option>
+              );
             })
           : null}
       </select>
