@@ -97,6 +97,7 @@ export const CheckRoles = () => {
             <ActivistRegister
               key={r.name}
               setRegistration={setRegistration}
+              role={r.name}
             />
           );
         } else return <NotAuthenticated key={null} />;

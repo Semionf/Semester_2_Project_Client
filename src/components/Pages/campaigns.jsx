@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { getCampaigns } from "../services/service";
+import { getAllCampaigns, getCampaigns } from "../services/service";
 
 export const Campaigns = ({ Email }) => {
   const [campaignsArr, setCampaign] = useState([]);
 
   const campaignsData = async () => {
-    let campaign = await getCampaigns(Email);
+    let campaign;
+    if (Email !== "sfurlender@gmail.com") {
+      campaign = await getCampaigns(Email);
+    } else {
+      campaign = await getAllCampaigns();
+    }
+    console.log(campaign);
     setCampaign(campaign);
   };
 

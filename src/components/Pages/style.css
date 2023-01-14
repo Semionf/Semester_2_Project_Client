@@ -69,3 +69,13 @@ h4 {
 .inputSize {
   width: 150px;
 }
+
+.size {
+  display: flex;
+  height: 45px !important;
+  align-items: center !important;
+  padding: 0px !important;
+}
+button {
+  margin-bottom: 20px !important;
+}

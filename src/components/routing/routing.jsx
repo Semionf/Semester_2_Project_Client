@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import {
   About,
   AddCampaign,
-  AllProducts,
+  AllTwitts,
   CampaignProductsBought,
   Campaigns,
   ContactUs,
@@ -12,6 +12,7 @@ import {
   Home,
   Products,
   ProductsBought,
+  Users,
   Twitts,
 } from "../Pages/main";
 export const Routing = ({ Email, BusinessEmail }) => {
@@ -34,12 +35,20 @@ export const Routing = ({ Email, BusinessEmail }) => {
         element={<Products Email={Email} />}
       ></Route>
       <Route
-        path="/ProductsBought/:userID"
-        element={<ProductsBought />}
+        path="/ProductsBought/"
+        element={<ProductsBought BusinessEmail={BusinessEmail} />}
       ></Route>
       <Route
         path="/Twitts/:userID"
         element={<Twitts />}
+      ></Route>
+      <Route
+        path="/AllTwitts/"
+        element={<AllTwitts />}
+      ></Route>
+      <Route
+        path="/Users/"
+        element={<Users />}
       ></Route>
       <Route
         path="/Donate"
@@ -58,12 +67,8 @@ export const Routing = ({ Email, BusinessEmail }) => {
         element={<Campaigns Email={Email} />}
       ></Route>
       <Route
-        path="/ProductsBought"
-        element={<CampaignProductsBought BusinessEmail={BusinessEmail} />}
-      ></Route>
-      <Route
-        path="/AllProducts"
-        element={<AllProducts />}
+        path="/ActivistProducts"
+        element={<CampaignProductsBought Email={Email} />}
       ></Route>
     </Routes>
   );

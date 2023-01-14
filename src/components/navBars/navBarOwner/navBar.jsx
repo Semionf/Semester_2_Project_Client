@@ -35,7 +35,7 @@ export const NavBar = (props) => {
             </Link>
           </li>
           <li>
-            <Link to="/AllCampaigns">
+            <Link to="/Campaigns">
               <CampaignIcon fontSize="large" />
               <div className="section-name">Campaigns</div>
             </Link>

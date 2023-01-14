@@ -34,11 +34,12 @@ export const NavBar = (props) => {
             </Link>
           </li>
           <li>
-            <Link to="/ProductsBought/:userID">
+            <Link to="/ActivistProducts/">
               <MonetizationOnIcon fontSize="large" />
               <div className="section-name">Products Bought</div>
             </Link>
           </li>
+
           <li>
             <Link to="/Twitts/:userID">
               <TwitterIcon fontSize="large" />

@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { buyProduct, getAllProducts, getBalance } from "../services/service";
+import {
+  buyProduct,
+  getAllProducts,
+  getBalance,
+  tweet,
+} from "../services/service";
 import "./style.css";
 
 export const Products = ({ Email }) => {
@@ -8,18 +13,20 @@ export const Products = ({ Email }) => {
   const [totalPrice, setTotalPrice] = useState({});
   const [totalSum, setTotalSum] = useState(0);
   const [balance, setBalance] = useState(0);
-  const [quantity, setQuantity] = useState("");
+  const [productID, setID] = useState(0);
+  const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState("");
 
   const productsData = async () => {
     let product = await getAllProducts();
-    console.log(product);
+
     setProducts(product);
+    socialBalanceData();
   };
 
   const socialBalanceData = async () => {
     let tempBalance = await getBalance(Email);
-    console.log(Email);
+
     setBalance(tempBalance);
   };
 
@@ -37,14 +44,21 @@ export const Products = ({ Email }) => {
 
   function handleSubmit(Product) {
     let product = {
+      ID: productID,
       Name: Product.Name,
       Quantity: quantity,
       Price: price,
-      Hashtag: Product.CampaignHashtag,
-      Email: Email,
+      CampaignHashtag: Product.CampaignHashtag,
+      Activist_Email: Email,
     };
     console.log(product);
     buyProduct(product);
+
+    if (quantity === 1)
+      alert("You have purchased: " + quantity + " " + product.Name);
+    else alert("You have purchased: " + quantity + " " + product.Name + "s");
+    tweet(Email);
+    productsData();
   }
 
   function handleSubmitAll() {
@@ -55,11 +69,12 @@ export const Products = ({ Email }) => {
         ).value;
         if (quantity > 0) {
           return {
+            ID: product.ID,
             Name: product.Name,
             Quantity: parseInt(quantity),
             Price: product.Price * parseInt(quantity),
-            Hashtag: product.CampaignHashtag,
-            Email: Email,
+            CampaignHashtag: product.CampaignHashtag,
+            Activist_Email: Email,
           };
         }
         return null;
@@ -67,8 +82,10 @@ export const Products = ({ Email }) => {
       .filter((product) => product !== null);
     console.log("All Products:");
     productsToBuy.map((product) => {
+      console.log(product);
       buyProduct(product);
     });
+    productsData();
   }
 
   function handleBuyAllClick() {
@@ -79,13 +96,16 @@ export const Products = ({ Email }) => {
     handleSubmitAll();
   }
 
-  useEffect(() => {
-    productsData();
-    socialBalanceData();
-    setTotalSum(
-      Object.values(totalPrice).reduce((sum, price) => sum + price, 0),
-    );
-  }, [totalPrice]);
+  useEffect(
+    () => {
+      productsData();
+      setTotalSum(
+        Object.values(totalPrice).reduce((sum, price) => sum + price, 0),
+      );
+    },
+    [totalPrice],
+    [productsArr],
+  );
 
   return (
     <>
@@ -118,7 +138,7 @@ export const Products = ({ Email }) => {
                       <th>
                         <input
                           className="inputSize"
-                          placeholder="0"
+                          defaultValue={0}
                           type="number"
                           min="0"
                           max={
@@ -135,6 +155,7 @@ export const Products = ({ Email }) => {
                                     Product.Price,
                               Product.ID,
                             );
+                            setID(Product.ID);
                             setQuantity(parseInt(event.target.value));
                           }}
                         ></input>
@@ -142,7 +163,7 @@ export const Products = ({ Email }) => {
                       <th>
                         {totalPrice[Product.ID] ? totalPrice[Product.ID] : 0}$
                       </th>
-                      <th className="space">
+                      <th className="space size">
                         {balance > totalSum ? (
                           <button
                             className="btn btn-success"
