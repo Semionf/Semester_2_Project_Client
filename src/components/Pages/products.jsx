@@ -52,8 +52,9 @@ export const Products = ({ Email }) => {
       Activist_Email: Email,
     };
     console.log(Email);
-    buyProduct(product);
+
     if (quantity > 0) {
+      buyProduct(product);
       if (quantity === 1)
         alert("You have purchased: " + quantity + " " + product.Name);
       else if (quantity > 1)

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getTweets, tweet } from "../services/service";
+
 import "./style.css";
 export const Twitts = ({ Email }) => {
   //Social Activist
@@ -14,13 +15,15 @@ export const Twitts = ({ Email }) => {
   const handleSubmit = async (Tweet) => {
     console.log(Tweet);
     tweet(Tweet);
+    new Promise((resolve) => setTimeout(resolve, 1000));
+    tweetsData();
   };
   useEffect(() => {
     tweetsData();
   }, []);
   return (
     <div>
-      {console.log(tweetsArr.length)}
+      {console.log(tweetsArr)}
       {tweetsArr && tweetsArr.length > 0 ? (
         <div>
           <h1>Tweets Posted</h1>
