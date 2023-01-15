@@ -5,22 +5,22 @@ import { LogoutButton } from "../../logout/logout";
 export const OrganizationRegister = ({ role, setRegistration }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [website, setWebsite] = useState("");
+  const [link, setLink] = useState("");
 
   function handleSubmit(e) {
     let user = {
       Name: name,
       Email: email,
-      Link: website,
+      Link: link,
       Role: role,
     };
     newUser(user);
     setRegistration(true);
-    console.log(name, email, website, role);
+    console.log(name, email, link, role);
   }
 
   return (
-    <div>
+    <div className="regContainer">
       <h1>Registration</h1>
       <label className="rightSpace">
         Name:
@@ -43,23 +43,27 @@ export const OrganizationRegister = ({ role, setRegistration }) => {
       </label>
       <br />
       <label className="rightSpace">
-        Website:
+        Link:
         <input
           className="rightSpace"
-          type="url"
-          value={website}
-          onChange={(e) => setWebsite(e.target.value)}
+          type="tel"
+          value={link}
+          onChange={(e) => setLink(e.target.value)}
         />
       </label>
       <br />
-      <button
-        type="submit"
-        className="btn btn-primary"
-        onClick={() => handleSubmit()}
-      >
-        Submit
-      </button>
-      <LogoutButton />
+      <div className="rightSpace">
+        <button
+          className="btn btn-primary"
+          type="submit"
+          onClick={() => {
+            handleSubmit();
+          }}
+        >
+          Submit
+        </button>
+        <LogoutButton />
+      </div>
     </div>
   );
 };

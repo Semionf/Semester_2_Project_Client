@@ -44,9 +44,9 @@ export const getRoles = async (userID) => {
   }
 };
 
-export const tweet = async (Email) => {
+export const getActivistTweets = async (Email) => {
   try {
-    let endpointTweet = `${URLServer}Tweet/POST/${Email}`;
+    let endpointTweet = `${URLServer}Tweet/GET/${Email}`;
 
     let response = await axios.get(endpointTweet);
     return Object.values(response.data);
@@ -55,8 +55,8 @@ export const tweet = async (Email) => {
   }
 };
 
-export const getActivistTweets = async (Email) => {
-  let response = await axios.post(`${URLServer}Tweet/GET/`, Email);
+export const tweet = async (Tweet) => {
+  let response = await axios.post(`${URLServer}Tweet/POST/`, Tweet);
 
   if (response.status === 200) {
     return Object.values(response.data);
@@ -65,6 +65,14 @@ export const getActivistTweets = async (Email) => {
 
 export const getAllTweets = async () => {
   let response = await axios.post(`${URLServer}Tweet/GETALL/`);
+
+  if (response.status === 200) {
+    return Object.values(response.data);
+  }
+};
+
+export const getTweets = async (Email) => {
+  let response = await axios.post(`${URLServer}Tweet/GET/${Email}`);
 
   if (response.status === 200) {
     return Object.values(response.data);

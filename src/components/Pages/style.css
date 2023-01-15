@@ -72,10 +72,32 @@ h4 {
 
 .size {
   display: flex;
-  height: 45px !important;
+  height: 50px !important;
   align-items: center !important;
   padding: 0px !important;
 }
+
+.size2 {
+  display: flex;
+  height: 100px !important;
+  align-items: center !important;
+  padding: 0px !important;
+}
+
 button {
   margin-bottom: 20px !important;
+  margin-right: 20px !important;
+}
+
+.totalSum {
+  margin-top: 40px !important;
+}
+
+.totalSumBtn {
+  margin-top: 45px !important;
+}
+
+.regContainer {
+  display: flex;
+  flex-direction: column;
 }

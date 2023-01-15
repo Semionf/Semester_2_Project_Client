@@ -41,7 +41,7 @@ export const NavBar = (props) => {
           </li>
 
           <li>
-            <Link to="/Twitts/:userID">
+            <Link to="/Twitts/">
               <TwitterIcon fontSize="large" />
               <div className="section-name">All Twitts</div>
             </Link>

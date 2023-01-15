@@ -20,50 +20,50 @@ export const BuisnessRegister = ({ role, setRegistration }) => {
   }
 
   return (
-    <div>
+    <div className="regContainer">
       <h1>Registration</h1>
-      <div className="row">
-        <div className="col">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Name"
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
-        </div>
-        <div className="col">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-        </div>
-        <div className="col">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Link to website"
-            onChange={(e) => {
-              setLink(e.target.value);
-            }}
-          />
-        </div>
+      <label className="rightSpace">
+        Name:
+        <input
+          className="rightSpace"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </label>
+      <br />
+      <label className="rightSpace">
+        Email:
+        <input
+          className="rightSpace"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </label>
+      <br />
+      <label className="rightSpace">
+        Link:
+        <input
+          className="rightSpace"
+          type="tel"
+          value={link}
+          onChange={(e) => setLink(e.target.value)}
+        />
+      </label>
+      <br />
+      <div className="rightSpace">
+        <button
+          className="btn btn-primary"
+          type="submit"
+          onClick={() => {
+            handleSubmit();
+          }}
+        >
+          Submit
+        </button>
+        <LogoutButton />
       </div>
-      <button
-        className="btn btn-primary"
-        type="submit"
-        onClick={() => {
-          handleSubmit();
-        }}
-      >
-        Register
-      </button>
-      <LogoutButton />
     </div>
   );
 };

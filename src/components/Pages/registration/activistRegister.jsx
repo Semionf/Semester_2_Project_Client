@@ -15,7 +15,7 @@ export const ActivistRegister = ({ role, setRegistration }) => {
   }
 
   return (
-    <div onSubmit={handleSubmit}>
+    <div className="regContainer">
       <h1>Registration</h1>
       <label className="rightSpace">
         Email:
@@ -47,15 +47,18 @@ export const ActivistRegister = ({ role, setRegistration }) => {
         />
       </label>
       <br />
-      <button
-        type="submit"
-        onClick={() => {
-          handleSubmit();
-        }}
-      >
-        Submit
-      </button>
-      <LogoutButton />
+      <div>
+        <button
+          className="btn btn-primary"
+          type="submit"
+          onClick={() => {
+            handleSubmit();
+          }}
+        >
+          Submit
+        </button>
+        <LogoutButton />
+      </div>
     </div>
   );
 };

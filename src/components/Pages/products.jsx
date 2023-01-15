@@ -51,14 +51,21 @@ export const Products = ({ Email }) => {
       CampaignHashtag: Product.CampaignHashtag,
       Activist_Email: Email,
     };
-    console.log(product);
+    console.log(Email);
     buyProduct(product);
-
-    if (quantity === 1)
-      alert("You have purchased: " + quantity + " " + product.Name);
-    else alert("You have purchased: " + quantity + " " + product.Name + "s");
-    tweet(Email);
-    productsData();
+    if (quantity > 0) {
+      if (quantity === 1)
+        alert("You have purchased: " + quantity + " " + product.Name);
+      else if (quantity > 1)
+        alert("You have purchased: " + quantity + " " + product.Name + "s");
+      tweet({
+        Campaign_Hashtag: product.CampaignHashtag,
+        Social_Activist_Email: Email,
+        Product_Name: product.Name,
+        Quantity: product.Quantity,
+      });
+      productsData();
+    }
   }
 
   function handleSubmitAll() {
@@ -191,19 +198,19 @@ export const Products = ({ Email }) => {
           </tbody>
           <th>
             {" "}
-            <div className="totalSum">Total Sum: {totalSum}$</div>
+            <h1 className="totalSum">Total Sum: {totalSum}$</h1>
           </th>
           <th className="space">
             {balance > totalSum ? (
               <button
-                className="btn btn-success"
+                className="totalSumBtn btn btn-success"
                 onClick={handleBuyAllClick}
               >
                 Buy All
               </button>
             ) : (
               <button
-                className="btn btn-danger"
+                className="totalSumBtn btn btn-danger"
                 disabled
               >
                 Balance too low
