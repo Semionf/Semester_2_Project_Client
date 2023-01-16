@@ -14,9 +14,8 @@ export const Twitts = ({ Email }) => {
   };
   const handleSubmit = async (Tweet) => {
     console.log(Tweet);
-    tweet(Tweet);
-    new Promise((resolve) => setTimeout(resolve, 1000));
-    tweetsData();
+    await tweet(Tweet);
+    await tweetsData();
   };
   useEffect(() => {
     tweetsData();

@@ -12,13 +12,10 @@ export const ProductsBought = ({ BusinessEmail }) => {
   };
   const handleSubmit = async (Product) => {
     console.log("This is " + Product.ID);
-    supplyProduct(Product);
-    updateList();
+    await supplyProduct(Product);
+    await productsBought();
   };
-  function updateList() {
-    new Promise((resolve) => setTimeout(resolve, 1000));
-    productsBought();
-  }
+
   useEffect(() => {
     productsBought();
   }, []);

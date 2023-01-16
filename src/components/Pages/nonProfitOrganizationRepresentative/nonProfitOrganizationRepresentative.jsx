@@ -6,6 +6,7 @@ export const NonProfitOrganizationRepresentative = ({ Email }) => {
   return (
     <>
       <NavBar></NavBar>
+
       <Routing Email={Email} />
     </>
   );

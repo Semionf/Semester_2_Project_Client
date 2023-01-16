@@ -6,6 +6,7 @@ export const SocialActivist = ({ Email }) => {
   return (
     <>
       <NavBar></NavBar>
+
       <Routing Email={Email} />
     </>
   );

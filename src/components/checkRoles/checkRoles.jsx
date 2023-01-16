@@ -12,6 +12,8 @@ import { NotAuthenticated } from "../notAuthenticated/notAuthenticated";
 import { OrganizationRegister } from "../Pages/registration/organizationRegister";
 import { ActivistRegister } from "../Pages/registration/activistRegister";
 import { BuisnessRegister } from "../Pages/registration/buisnessRegister";
+import { SyncLoader } from "react-spinners";
+import "../Pages/style.css";
 
 export const CheckRoles = () => {
   const [roles, setRoles] = useState([]);
@@ -50,58 +52,59 @@ export const CheckRoles = () => {
     handleRoles();
   }, []);
   handleRegistration();
+
   return (
-    <div className="navBar">
-      {roles.map((r) => {
-        if (r.name === "Business Company Representative") {
-          return isRegistered === true ? (
-            <BusinessCompanyRepresentative
-              key={r.name}
-              BusinessEmail={user.email}
-            />
-          ) : (
-            <BuisnessRegister
-              setRegistration={setRegistration}
-              key={r.name}
-              role={r.name}
-            />
-          );
-        } else if (r.name === "Non-Profit Organization Representative") {
-          return isRegistered === true ? (
-            <NonProfitOrganizationRepresentative
-              key={r.name}
-              ID={r.ID}
-              Email={user.email}
-            />
-          ) : (
-            <OrganizationRegister
-              setRegistration={setRegistration}
-              key={r.name}
-              role={r.name}
-            />
-          );
-        } else if (r.name === "ProLobby Owner")
-          return (
-            <ProLobbyOwner
-              key={r.name}
-              userID={user.email}
-            />
-          );
-        else if (r.name === "Social Activist") {
-          return isRegistered === true ? (
-            <SocialActivist
-              key={r.name}
-              Email={user.email}
-            />
-          ) : (
-            <ActivistRegister
-              key={r.name}
-              setRegistration={setRegistration}
-              role={r.name}
-            />
-          );
-        } else return <NotAuthenticated key={null} />;
-      })}
-    </div>
+    <>
+      {isRegistered === undefined ? (
+        <div className="mySpinner">
+          <SyncLoader color="#36d7b7" />
+        </div>
+      ) : (
+        <div className="navBar">
+          {roles.map((r) => {
+            if (r.name === "Business Company Representative") {
+              return isRegistered === true ? (
+                <BusinessCompanyRepresentative
+                  key={r.name}
+                  BusinessEmail={user.email}
+                />
+              ) : (
+                <BuisnessRegister
+                  setRegistration={setRegistration}
+                  key={r.name}
+                  role={r.name}
+                />
+              );
+            } else if (r.name === "Non-Profit Organization Representative") {
+              return isRegistered === true ? (
+                <NonProfitOrganizationRepresentative
+                  key={r.name}
+                  ID={r.ID}
+                  Email={user.email}
+                />
+              ) : (
+                <OrganizationRegister
+                  setRegistration={setRegistration}
+                  key={r.name}
+                  role={r.name}
+                />
+              );
+            } else if (r.name === "ProLobby Owner")
+              return <ProLobbyOwner key={r.name} userID={user.email} />;
+            else if (r.name === "Social Activist") {
+              return isRegistered === true ? (
+                <SocialActivist key={r.name} Email={user.email} />
+              ) : (
+                <ActivistRegister
+                  key={r.name}
+                  setRegistration={setRegistration}
+                  role={r.name}
+                />
+              );
+            } else return <NotAuthenticated key={null} />;
+          })}
+        </div>
+      )}
+    </>
   );
 };

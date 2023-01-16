@@ -15,23 +15,24 @@ export const Products = ({ Email }) => {
   const [balance, setBalance] = useState(0);
   const [productID, setID] = useState(0);
   const [quantity, setQuantity] = useState(0);
+  const [value, setValue] = useState(0);
   const [price, setPrice] = useState("");
 
   const productsData = async () => {
     let product = await getAllProducts();
 
-    setProducts(product);
+    await setProducts(product);
     socialBalanceData();
   };
 
   const socialBalanceData = async () => {
     let tempBalance = await getBalance(Email);
 
-    setBalance(tempBalance);
+    await setBalance(tempBalance);
   };
 
   const setTotal = (Price, ID) => {
-    setQuantity();
+    setQuantity(0);
     if (!totalPrice[ID]) {
       setTotalPrice({ ...totalPrice, [ID]: 0 });
     }
@@ -66,6 +67,8 @@ export const Products = ({ Email }) => {
         Quantity: product.Quantity,
       });
       productsData();
+      const input = document.getElementById(`quantity-${Product.ID}`);
+      input.value = 0;
     }
   }
 
@@ -91,7 +94,10 @@ export const Products = ({ Email }) => {
     console.log("All Products:");
     productsToBuy.map((product) => {
       console.log(product);
+      alert("you have bought " + product.Quantity + " " + product.Name);
       buyProduct(product);
+      const input = document.getElementById(`quantity-${product.ID}`);
+      input.value = 0;
     });
     productsData();
   }
@@ -184,10 +190,7 @@ export const Products = ({ Email }) => {
                             Buy
                           </button>
                         ) : (
-                          <button
-                            className="btn btn-danger"
-                            disabled
-                          >
+                          <button className="btn btn-danger" disabled>
                             Balance too low
                           </button>
                         )}
@@ -196,28 +199,28 @@ export const Products = ({ Email }) => {
                   </>
                 );
               })}
+
+            <tr>
+              <th>
+                {" "}
+                <h1 className="totalSum">Total Sum: {totalSum}$</h1>
+              </th>
+              <th className="space">
+                {balance > totalSum ? (
+                  <button
+                    className="totalSumBtn btn btn-success"
+                    onClick={handleBuyAllClick}
+                  >
+                    Buy All
+                  </button>
+                ) : (
+                  <button className="totalSumBtn btn btn-danger" disabled>
+                    Balance too low
+                  </button>
+                )}
+              </th>
+            </tr>
           </tbody>
-          <th>
-            {" "}
-            <h1 className="totalSum">Total Sum: {totalSum}$</h1>
-          </th>
-          <th className="space">
-            {balance > totalSum ? (
-              <button
-                className="totalSumBtn btn btn-success"
-                onClick={handleBuyAllClick}
-              >
-                Buy All
-              </button>
-            ) : (
-              <button
-                className="totalSumBtn btn btn-danger"
-                disabled
-              >
-                Balance too low
-              </button>
-            )}
-          </th>
         </table>
       </div>
     </>

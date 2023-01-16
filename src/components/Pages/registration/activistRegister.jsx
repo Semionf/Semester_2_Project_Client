@@ -47,18 +47,16 @@ export const ActivistRegister = ({ role, setRegistration }) => {
         />
       </label>
       <br />
-      <div>
-        <button
-          className="btn btn-primary"
-          type="submit"
-          onClick={() => {
-            handleSubmit();
-          }}
-        >
-          Submit
-        </button>
-        <LogoutButton />
-      </div>
+      <button
+        className="btn btn-primary"
+        type="submit"
+        onClick={() => {
+          handleSubmit();
+        }}
+      >
+        Submit
+      </button>
+      <LogoutButton />
     </div>
   );
 };

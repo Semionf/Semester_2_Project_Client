@@ -7,10 +7,15 @@ export const AddCampaign = ({ Email }) => {
 
   function handleSubmit() {
     let campaign = { Link: link, Hashtag: hashtag, Email: Email };
-    newCampaign(campaign);
-    setLink("");
-    setHashtag("");
-    console.log(link, hashtag, Email);
+    if (link !== "" && hashtag !== "") {
+      newCampaign(campaign);
+      setLink("");
+      setHashtag("");
+      console.log(link, hashtag, Email);
+      alert("New Campaign been added!");
+    } else {
+      alert("Please enter all fields!");
+    }
   }
   return (
     <div>
